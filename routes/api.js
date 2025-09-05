@@ -10,7 +10,7 @@ module.exports = function (app) {
     .post(function (req, res){
       let board = req.body.board;
       let text = req.body.text;
-      let delPassword = req.body.delete_password;
+      let delete_password = req.body.delete_password;
     })
 
     
