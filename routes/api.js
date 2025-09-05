@@ -1,5 +1,7 @@
 'use strict';
 
+let threads = [];
+
 module.exports = function (app) {
   
   app.route('/api/threads/:board')
