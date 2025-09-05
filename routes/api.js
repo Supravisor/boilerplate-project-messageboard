@@ -1,6 +1,7 @@
 'use strict';
 
 let threads = [];
+let index = -1;
 
 module.exports = function (app) {
   
