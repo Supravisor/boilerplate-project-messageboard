@@ -14,7 +14,7 @@ module.exports = function (app) {
 
       let date = new Date();
 
-      threads.push({
+      let newThread = {
         _id: ++index,
         text: text,
         delete_password: delete_password,
@@ -22,7 +22,16 @@ module.exports = function (app) {
         bumped_on: date,
         reported: false,
         replies: []
-      });
+      };
+
+      if (threads[board]) {
+        threads[board].push(newThread);
+      } else {
+          threads[board] = [];
+          threads[board].push(newThread);
+      }
+
+      return res.json(threads[board]);
 
     })
 
