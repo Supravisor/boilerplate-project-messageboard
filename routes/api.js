@@ -35,7 +35,11 @@ module.exports = function (app) {
 
     })
 
-    
+    .get(function (req, res){
+      let board = req.body.board;
+      return res.json(threads[board][threads[board].length - 1]);
+    })
+
   app.route('/api/replies/:board');
 
   
