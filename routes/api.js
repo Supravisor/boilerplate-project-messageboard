@@ -2,6 +2,7 @@
 
 let threads = {};
 let index = -1;
+let currentBoard = "";
 
 module.exports = function (app) {
   
@@ -29,6 +30,7 @@ module.exports = function (app) {
       } else {
           threads[board] = [];
           threads[board].push(newThread);
+          currentBoard = board;
       }
 
       return res.json(threads[board]);
@@ -36,7 +38,7 @@ module.exports = function (app) {
     })
 
     .get(function (req, res){
-      let board = req.body.board;
+      return res.json(threads[currentBoard]);
     })
 
   app.route('/api/replies/:board');
