@@ -36,6 +36,7 @@ module.exports = function (app) {
     })
 
     .get(function (req, res){
+      let board = req.body.board;
     })
 
   app.route('/api/replies/:board');
