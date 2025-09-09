@@ -51,6 +51,9 @@ module.exports = function (app) {
       let thread_id = parseInt(req.body.thread_id);
       let text = req.body.text;
       let delete_password = req.body.delete_password;
+
+      threads[currentBoard][thread_id]['bumped_on'] = new Date();
+
     });
   
 };
