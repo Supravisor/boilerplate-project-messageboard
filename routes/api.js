@@ -39,9 +39,13 @@ module.exports = function (app) {
 
     .get(function (req, res){
       return res.json(threads[currentBoard]);
-    })
+    });
 
-  app.route('/api/replies/:board');
+  app.route('/api/replies/:board')
+
+    .post(function (req, res){
+    });
+
 
   
 };
