@@ -48,8 +48,7 @@ module.exports = function (app) {
   app.route('/api/replies/:board')
 
     .post(function (req, res){
+      let thread_id = parseInt(req.body.thread_id);
     });
-
-
   
 };
