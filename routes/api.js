@@ -55,7 +55,8 @@ module.exports = function (app) {
       threads[currentBoard][thread_id]['bumped_on'] = new Date();
       threads[currentBoard][thread_id]['replies'].push({
         _id: thread_id,
-        text: text
+        text: text,
+        delete_password: delete_password
       });
 
     });
