@@ -50,6 +50,7 @@ module.exports = function (app) {
     .post(function (req, res){
       let thread_id = parseInt(req.body.thread_id);
       let text = req.body.text;
+      let delete_password = req.body.delete_password;
     });
   
 };
