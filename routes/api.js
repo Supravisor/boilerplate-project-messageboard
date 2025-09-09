@@ -56,7 +56,8 @@ module.exports = function (app) {
       threads[currentBoard][thread_id]['replies'].push({
         _id: thread_id,
         text: text,
-        delete_password: delete_password
+        delete_password: delete_password,
+        reported: false
       });
 
     });
