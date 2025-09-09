@@ -53,6 +53,8 @@ module.exports = function (app) {
       let delete_password = req.body.delete_password;
 
       threads[currentBoard][thread_id]['bumped_on'] = new Date();
+      threads[currentBoard][thread_id]['replies'].push({
+      });
 
     });
   
