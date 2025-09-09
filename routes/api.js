@@ -5,6 +5,8 @@ let index = -1;
 let currentBoard = "";
 
 module.exports = function (app) {
+
+  // threads
   
   app.route('/api/threads/:board')
 
