@@ -65,6 +65,9 @@ module.exports = function (app) {
 
     .get(function (req, res){
       let board = req.params.board;
+
+      return res.json(threads[board][0]["replies"]);
+
     });
 
 
