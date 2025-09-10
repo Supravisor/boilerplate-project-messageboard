@@ -60,6 +60,12 @@ module.exports = function (app) {
         reported: false
       });
 
+    })
+
+
+    .get(function (req, res){
+      let board = req.params.board;
     });
-  
+
+
 };
