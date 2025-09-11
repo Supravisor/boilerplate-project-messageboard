@@ -52,8 +52,8 @@ module.exports = function (app) {
       let text = req.body.text;
       let delete_password = req.body.delete_password;
 
-      threads[currentBoard][thread_id]['bumped_on'] = new Date();
-      threads[currentBoard][thread_id]['replies'].push({
+      threads[currentBoard][0]['bumped_on'] = new Date();
+      threads[currentBoard][0]['replies'].push({
         _id: thread_id,
         text: text,
         delete_password: delete_password,
@@ -66,7 +66,14 @@ module.exports = function (app) {
     .get(function (req, res){
       let board = req.params.board;
 
-      return res.json(threads[board][0]["replies"]);
+      let allReplies = threads[board][0]["replies"];
+      let replies = []
+        for (let i = 0; i < allReplies.length; i++) {
+          const { _id, text } = allReplies[i];
+          replies.push({ _id, text });
+        }
+
+      return res.json(replies);
 
     });
 
