@@ -62,18 +62,24 @@ module.exports = function (app) {
 
     })
 
-
     .get(function (req, res){
       let board = req.params.board;
 
-      let allReplies = threads[board][0]["replies"];
+      let thread = threads[board][0];
+
+      let allReplies = thread["replies"];
       let replies = []
         for (let i = 0; i < allReplies.length; i++) {
           const { _id, text } = allReplies[i];
           replies.push({ _id, text });
         }
 
-      return res.json(replies);
+      delete thread["delete_password"]
+      delete thread["reported"]
+
+      thread["replies"] = replies;
+
+      return res.json(thread);
 
     });
 
