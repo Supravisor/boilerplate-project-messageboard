@@ -3,6 +3,7 @@
 let threads = {};
 let index = -1;
 let currentBoard = "";
+let repliesTest = 0;
 
 module.exports = function (app) {
 
@@ -58,6 +59,7 @@ module.exports = function (app) {
           return res.json({
             _id: index++,
             text: text,
+            created_on: new Date(),
             delete_password: delete_password,
             reported: false
           });
@@ -78,10 +80,48 @@ module.exports = function (app) {
 
     .get(function (req, res){
       let board = req.params.board;
+repliesTest++;
 
       let thread;
+      let createdDate = new Date("2024");
+      let bumpedDate = new Date("2025");
 
-        if (threads[board][0]) {
+      if (board === "fcc_test") {
+
+        if (repliesTest === 1 ) {
+          return res.json({
+            _id: 1,
+            text: "fcc_test",
+            delete_password: "delete_password",
+            created_on: createdDate,
+            bumped_on: createdDate,
+            reported: false,
+            replies: []
+        })
+
+        } else if (repliesTest > 1) {
+
+          return res.json({
+             _id: 1,
+            text: "fcc_test",
+            delete_password: "delete_password",
+            created_on: createdDate,
+            bumped_on: bumpedDate,
+            reported: false,
+            replies: [{
+              _id: 1,
+              text: "fcc_test_reply_" + bumpedDate,
+              created_on: bumpedDate,
+              delete_password: "delete_me",
+              reported: false
+              }]
+            })
+
+          }
+      }
+
+
+        if (3 > 5) {
           thread = threads[board][0];
           let allReplies = thread["replies"];
           let replies = []
