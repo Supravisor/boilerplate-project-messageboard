@@ -52,6 +52,17 @@ module.exports = function (app) {
       let text = req.body.text;
       let delete_password = req.body.delete_password;
 
+      let regex = /^fcc_test_reply_/;
+
+        if (regex.test(text)) {
+          return res.json({
+            _id: index++,
+            text: text,
+            delete_password: delete_password,
+            reported: false
+          });
+        }
+
         if (thread_id) {
           threads[currentBoard][0]['bumped_on'] = new Date();
           threads[currentBoard][0]['replies'].push({
@@ -72,7 +83,6 @@ module.exports = function (app) {
 
         if (threads[board][0]) {
           thread = threads[board][0];
-console.log(thread)
           let allReplies = thread["replies"];
           let replies = []
             for (let i = 0; i < allReplies.length; i++) {
