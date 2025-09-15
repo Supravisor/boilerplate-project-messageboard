@@ -52,13 +52,16 @@ module.exports = function (app) {
       let text = req.body.text;
       let delete_password = req.body.delete_password;
 
-      threads[currentBoard][0]['bumped_on'] = new Date();
-      threads[currentBoard][0]['replies'].push({
-        _id: thread_id,
-        text: text,
-        delete_password: delete_password,
-        reported: false
-      });
+        if (thread_id) {
+          threads[currentBoard][0]['bumped_on'] = new Date();
+          threads[currentBoard][0]['replies'].push({
+            _id: thread_id,
+            text: text,
+            delete_password: delete_password,
+            reported: false
+          });
+        }
+
 
     })
 
