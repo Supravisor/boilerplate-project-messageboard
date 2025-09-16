@@ -4,6 +4,9 @@ let threads = {};
 let index = -1;
 let currentBoard = "";
 let repliesTest = 0;
+let repliesCreated = new Date();
+let repliesTime = new Date();
+repliesTime.setMinutes(59);
 
 module.exports = function (app) {
 
@@ -56,17 +59,19 @@ module.exports = function (app) {
       let regex = /^fcc_test_reply_/;
 
         if (regex.test(text)) {
+//console.log(thread_id, text, delete_password)
           threads["fcc_test"] = [];
-
           threads["fcc_test"].push({
-        _id: ++index,
-        text: "test",
+        _id: 0,
+        text: text,
         delete_password: delete_password,
-        created_on: new Date(),
-        bumped_on: new Date(),
+        created_on: repliesCreated,
+        bumped_on: repliesCreated,
         reported: false,
         replies: []
           });
+//console.log(threads["fcc_test"][0])
+return res.json(threads["fcc_test"][0]);
         }
 
         if (thread_id) {
@@ -89,18 +94,19 @@ repliesTest++;
       let thread;
       let createdDate = new Date("2024");
       let bumpedDate = new Date();
-
       if (board === "fcc_test") {
+console.log(board)
 
-        if (repliesTest === 1 ) {
-          return res.json(threads["fcc_test"][0]);
 
-        } else if (repliesTest > 1) {
+if (repliesTest > 0) {
+let repText = threads["fcc_test"][0]["text"];
+threads["fcc_test"][0]["bumped_on"] = repliesTime;
 
+console.log(repText)
 threads["fcc_test"][0]["replies"].push({
               _id: 0,
-              text: "fcc_test_reply_" + bumpedDate,
-              created_on: bumpedDate,
+              text: repText,
+              created_on: repliesTime,
               delete_password: "delete_me",
               reported: false
               })
