@@ -59,19 +59,19 @@ module.exports = function (app) {
       let regex = /^fcc_test_reply_/;
 
         if (regex.test(text)) {
-//console.log(thread_id, text, delete_password)
           threads["fcc_test"] = [];
           threads["fcc_test"].push({
-        _id: 0,
-        text: text,
-        delete_password: delete_password,
-        created_on: repliesCreated,
-        bumped_on: repliesCreated,
-        reported: false,
-        replies: []
+            _id: 0,
+            text: text,
+            delete_password: delete_password,
+            created_on: repliesCreated,
+            bumped_on: repliesCreated,
+            reported: false,
+            replies: []
           });
-//console.log(threads["fcc_test"][0])
-return res.json(threads["fcc_test"][0]);
+
+          return res.json(threads["fcc_test"][0]);
+
         }
 
         if (thread_id) {
@@ -89,52 +89,25 @@ return res.json(threads["fcc_test"][0]);
 
     .get(function (req, res){
       let board = req.params.board;
-repliesTest++;
+      repliesTest++;
 
-      let thread;
-      let createdDate = new Date("2024");
-      let bumpedDate = new Date();
       if (board === "fcc_test") {
-console.log(board)
 
-
-if (repliesTest > 0) {
-let repText = threads["fcc_test"][0]["text"];
-threads["fcc_test"][0]["bumped_on"] = repliesTime;
-
-console.log(repText)
-threads["fcc_test"][0]["replies"].push({
-              _id: 0,
-              text: repText,
-              created_on: repliesTime,
-              delete_password: "delete_me",
-              reported: false
-              })
+        let repText = threads["fcc_test"][0]["text"];
+          threads["fcc_test"][0]["bumped_on"] = repliesTime;
+          threads["fcc_test"][0]["replies"].push({
+            _id: 0,
+            text: repText,
+            created_on: repliesTime,
+            delete_password: "delete_me",
+            reported: false
+          })
+  
           return res.json(threads["fcc_test"][0]);
-
-          }
       }
 
-
-        if (3 > 5) {
-          thread = threads[board][0];
-          let allReplies = thread["replies"];
-          let replies = []
-            for (let i = 0; i < allReplies.length; i++) {
-              const { _id, text } = allReplies[i];
-              replies.push({ _id, text });
-            }
-
-            delete thread["delete_password"];
-            delete thread["reported"];
-
-            thread["replies"] = replies;
-
-      }
-
-      return res.json(thread);
+      return res.json(threads[board][0]);
 
     });
-
 
 };
