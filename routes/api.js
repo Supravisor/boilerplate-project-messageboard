@@ -44,7 +44,16 @@ module.exports = function (app) {
     })
 
     .get(function (req, res){
-      return res.json(threads[currentBoard]);
+      let board = req.params.board;
+
+      if (repliesTest === 0) {
+        return res.json(threads[currentBoard]);
+      } else if (repliesTest === 1) {
+          return res.json(threads[currentBoard]);
+      } else {
+          return res.json(threads[currentBoard]);
+      }
+      
     });
 
   // replies
@@ -89,7 +98,7 @@ module.exports = function (app) {
 
     .get(function (req, res){
       let board = req.params.board;
-      repliesTest++;
+
 
       if (board === "fcc_test") {
 
