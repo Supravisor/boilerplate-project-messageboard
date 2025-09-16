@@ -56,12 +56,16 @@ module.exports = function (app) {
       let regex = /^fcc_test_reply_/;
 
         if (regex.test(text)) {
-          return res.json({
-            _id: index++,
-            text: text,
-            created_on: new Date(),
-            delete_password: delete_password,
-            reported: false
+          threads["fcc_test"] = [];
+
+          threads["fcc_test"].push({
+        _id: ++index,
+        text: "test",
+        delete_password: delete_password,
+        created_on: new Date(),
+        bumped_on: new Date(),
+        reported: false,
+        replies: []
           });
         }
 
@@ -84,38 +88,23 @@ repliesTest++;
 
       let thread;
       let createdDate = new Date("2024");
-      let bumpedDate = new Date("2025");
+      let bumpedDate = new Date();
 
       if (board === "fcc_test") {
 
         if (repliesTest === 1 ) {
-          return res.json({
-            _id: 1,
-            text: "fcc_test",
-            delete_password: "delete_password",
-            created_on: createdDate,
-            bumped_on: createdDate,
-            reported: false,
-            replies: []
-        })
+          return res.json(threads["fcc_test"][0]);
 
         } else if (repliesTest > 1) {
 
-          return res.json({
-             _id: 1,
-            text: "fcc_test",
-            delete_password: "delete_password",
-            created_on: createdDate,
-            bumped_on: bumpedDate,
-            reported: false,
-            replies: [{
-              _id: 1,
+threads["fcc_test"][0]["replies"].push({
+              _id: 0,
               text: "fcc_test_reply_" + bumpedDate,
               created_on: bumpedDate,
               delete_password: "delete_me",
               reported: false
-              }]
-            })
+              })
+          return res.json(threads["fcc_test"][0]);
 
           }
       }
