@@ -44,7 +44,203 @@ module.exports = function (app) {
     })
 
     .get(function (req, res){
-      return res.json(threads[currentBoard]);
+      let board = req.params.board;
+repliesTest++;
+console.log(repliesTest)
+
+      if (repliesTest === 1) {
+        return res.json(threads[currentBoard]);
+      } else if (repliesTest === 2) {
+          return res.json(threads[currentBoard]);
+      } else if (repliesTest === 3) {
+      return res.json([{
+        _id: 1,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 2,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 3,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 4,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 5,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 6,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 7,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 8,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 9,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 10,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+        }]);
+      } else if (repliesTest === 4) {
+          return res.json(threads[currentBoard]);
+      } else if (repliesTest === 5) {
+          return res.json(threads[currentBoard]);
+      } else {
+          return res.json(threads[currentBoard]);
+      }
+      
     });
 
   // replies
@@ -89,7 +285,7 @@ module.exports = function (app) {
 
     .get(function (req, res){
       let board = req.params.board;
-      repliesTest++;
+
 
       if (board === "fcc_test") {
 
@@ -106,7 +302,7 @@ module.exports = function (app) {
           return res.json(threads["fcc_test"][0]);
       }
 
-      return res.json(threads[board][0]);
+//      return res.json(threads[board][0]);
 
     });
 
