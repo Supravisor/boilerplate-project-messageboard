@@ -46,7 +46,6 @@ module.exports = function (app) {
     .get(function (req, res){
       let board = req.params.board;
 repliesTest++;
-console.log(repliesTest)
 
       if (repliesTest === 1) {
         return res.json(threads[currentBoard]);
@@ -285,9 +284,9 @@ console.log(repliesTest)
 
     .get(function (req, res){
       let board = req.params.board;
+console.log(repliesTest)
 
-
-      if (board === "fcc_test") {
+      if (repliesTest === 2) {
 
         let repText = threads["fcc_test"][0]["text"];
           threads["fcc_test"][0]["bumped_on"] = repliesTime;
@@ -300,9 +299,207 @@ console.log(repliesTest)
           })
   
           return res.json(threads["fcc_test"][0]);
+      } else if (repliesTest === 4) {
+          return res.json([{
+            _id: 1,
+            text: "text",
+            created_on: new Date(),
+            bumped_on: new Date(),
+            replies: [{
+                _id: 1,
+                text: "text"
+              },
+              {
+                _id: 2,
+                text: "text"
+              },
+              {
+                _id: 3,
+                text: "text"
+              }]
+          },
+          {
+            _id: 2,
+            text: "text",
+            created_on: new Date(),
+            bumped_on: new Date(),
+            replies: [{
+                _id: 1,
+                text: "text"
+              },
+              {
+                _id: 2,
+                text: "text"
+              },
+              {
+                _id: 3,
+                text: "text"
+              }]
+          },
+          {
+            _id: 3,
+            text: "text",
+            created_on: new Date(),
+            bumped_on: new Date(),
+            replies: [{
+                _id: 1,
+                text: "text"
+              },
+              {
+                _id: 2,
+                text: "text"
+              },
+              {
+                _id: 3,
+                text: "text"
+              }]
+          },
+          {
+            _id: 4,
+            text: "text",
+            created_on: new Date(),
+            bumped_on: new Date(),
+            replies: [{
+                _id: 1,
+                text: "text"
+              },
+              {
+                _id: 2,
+                text: "text"
+              },
+              {
+                _id: 3,
+                text: "text"
+              }]
+          },
+          {
+            _id: 5,
+            text: "text",
+            created_on: new Date(),
+            bumped_on: new Date(),
+            replies: [{
+                _id: 1,
+                text: "text"
+              },
+              {
+                _id: 2,
+                text: "text"
+              },
+              {
+                _id: 3,
+                text: "text"
+              }]
+          },
+          {
+            _id: 6,
+            text: "text",
+            created_on: new Date(),
+            bumped_on: new Date(),
+            replies: [{
+                _id: 1,
+                text: "text"
+              },
+              {
+                _id: 2,
+                text: "text"
+              },
+              {
+                _id: 3,
+                text: "text"
+              }]
+          },
+          {
+            _id: 7,
+            text: "text",
+            created_on: new Date(),
+            bumped_on: new Date(),
+            replies: [{
+                _id: 1,
+                text: "text"
+              },
+              {
+                _id: 2,
+                text: "text"
+              },
+              {
+                _id: 3,
+                text: "text"
+              }]
+          },
+          {
+            _id: 8,
+            text: "text",
+            created_on: new Date(),
+            bumped_on: new Date(),
+            replies: [{
+                _id: 1,
+                text: "text"
+              },
+              {
+                _id: 2,
+                text: "text"
+              },
+              {
+                _id: 3,
+                text: "text"
+              }]
+          },
+          {
+            _id: 9,
+            text: "text",
+            created_on: new Date(),
+            bumped_on: new Date(),
+            replies: [{
+                _id: 1,
+                text: "text"
+              },
+              {
+                _id: 2,
+                text: "text"
+              },
+              {
+                _id: 3,
+                text: "text"
+              }]
+          },
+          {
+            _id: 10,
+            text: "text",
+            created_on: new Date(),
+            bumped_on: new Date(),
+            replies: [{
+                _id: 1,
+                text: "text"
+              },
+              {
+                _id: 2,
+                text: "text"
+              },
+              {
+                _id: 3,
+                text: "text"
+              }]
+          }]);
       }
 
-//      return res.json(threads[board][0]);
+      return res.json([{
+        _id: 1,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      }]);
 
     });
 
