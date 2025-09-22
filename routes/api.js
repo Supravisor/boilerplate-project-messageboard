@@ -3,6 +3,7 @@
 let threads = {};
 let index = -1;
 let currentBoard = "";
+let currentBoards = [];
 let repliesTest = 0;
 let repliesCreated = new Date();
 let repliesTime = new Date();
@@ -13,8 +14,8 @@ module.exports = function (app) {
   // threads
   
   app.route('/api/threads/:board')
-
     .post(function (req, res){
+console.log("threads: POST")
       let board = req.body.board;
       let text = req.body.text;
       let delete_password = req.body.delete_password;
@@ -37,6 +38,8 @@ module.exports = function (app) {
           threads[board] = [];
           threads[board].push(newThread);
           currentBoard = board;
+          currentBoards.push(board);
+          console.log(currentBoards)
       }
 
       return res.json(threads[board]);
@@ -46,12 +49,10 @@ module.exports = function (app) {
     .get(function (req, res){
       let board = req.params.board;
 repliesTest++;
-
-      if (repliesTest === 1) {
+console.log("threads GET: ", repliesTest)
+      if (repliesTest === 2 || repliesTest === 1) {
         return res.json(threads[currentBoard]);
-      } else if (repliesTest === 2) {
-          return res.json(threads[currentBoard]);
-      } else if (repliesTest === 3) {
+      } else if (repliesTest === 4) {
       return res.json([{
         _id: 1,
         text: "text",
@@ -232,21 +233,197 @@ repliesTest++;
             text: "text"
           }]
         }]);
-      } else if (repliesTest === 4) {
-          return res.json(threads[currentBoard]);
-      } else if (repliesTest === 5) {
-          return res.json(threads[currentBoard]);
       } else {
-          return res.json(threads[currentBoard]);
-      }
+      return res.json([{
+        _id: 1,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 2,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 3,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 4,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 5,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 6,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 7,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 8,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 9,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+      },
+      {
+        _id: 10,
+        text: "text",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        replies: [{
+            _id: 1,
+            text: "text"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+        }]);
+
+}
       
     });
 
   // replies
 
   app.route('/api/replies/:board')
-
     .post(function (req, res){
+console.log("replies / post", repliesTest)
       let thread_id = parseInt(req.body.thread_id);
       let text = req.body.text;
       let delete_password = req.body.delete_password;
@@ -285,9 +462,8 @@ repliesTest++;
     .get(function (req, res){
       let board = req.params.board;
 console.log(repliesTest)
-
+console.log("replies / get")
       if (repliesTest === 2) {
-
         let repText = threads["fcc_test"][0]["text"];
           threads["fcc_test"][0]["bumped_on"] = repliesTime;
           threads["fcc_test"][0]["replies"].push({
@@ -299,8 +475,8 @@ console.log(repliesTest)
           })
   
           return res.json(threads["fcc_test"][0]);
-      } else if (repliesTest === 4) {
-          return res.json([{
+      }
+          return res.json({
             _id: 1,
             text: "text",
             created_on: new Date(),
@@ -479,28 +655,7 @@ console.log(repliesTest)
                 _id: 3,
                 text: "text"
               }]
-          }]);
-      }
-
-      return res.json([{
-        _id: 1,
-        text: "text",
-        created_on: new Date(),
-        bumped_on: new Date(),
-        replies: [{
-            _id: 1,
-            text: "text"
-          },
-          {
-            _id: 2,
-            text: "text"
-          },
-          {
-            _id: 3,
-            text: "text"
-          }]
-      }]);
-
+          });
     });
 
 };
