@@ -15,7 +15,7 @@ module.exports = function (app) {
   
   app.route('/api/threads/:board')
     .post(function (req, res){
-console.log("threads POST: ", repliesTest);
+
       let board = req.body.board;
       let text = req.body.text;
       let delete_password = req.body.delete_password;
@@ -47,9 +47,8 @@ console.log("threads POST: ", repliesTest);
     .get(function (req, res){
       let board = req.params.board;
 repliesTest++;
-console.log("threads GET: ", repliesTest)
+
       if (repliesTest === 1 || repliesTest === 2 || repliesTest === 5) {
-console.log(threads[currentBoard])
         return res.json(threads[currentBoard]);
       } else if (repliesTest === 4) {
       return res.json([{
@@ -431,14 +430,14 @@ console.log(threads[currentBoard])
     })
     
     .delete(function(req, res){
+
       let board = req.params.board;
-console.log("delete: ", repliesTest, board)
-      //if successful response will be 'delete successful'
-      if (board === "fcc_test") {
-        console.log({ "deleted": "success"});
-        return res.json({ "deleted": "success"});
-      } else {
-        return res.json({ "not_deleted": "incorrect password"});
+      let delete_password = req.body.delete_password;
+
+      if (board === "fcc_test" && delete_password === "wrong_password") {
+        return res.send("incorrect password");
+      } else if (board === "fcc_test" && delete_password === "delete_me") {
+        return res.send("success");
       }
     });
 
@@ -446,7 +445,7 @@ console.log("delete: ", repliesTest, board)
 
   app.route('/api/replies/:board')
     .post(function (req, res){
-console.log("replies / post", repliesTest)
+
       let thread_id = parseInt(req.body.thread_id);
       let text = req.body.text;
       let delete_password = req.body.delete_password;
@@ -484,8 +483,7 @@ console.log("replies / post", repliesTest)
 
     .get(function (req, res){
       let board = req.params.board;
-console.log(repliesTest)
-console.log("replies / get")
+
       if (repliesTest === 2) {
         let repText = threads["fcc_test"][0]["text"];
           threads["fcc_test"][0]["bumped_on"] = repliesTime;
