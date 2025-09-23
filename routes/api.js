@@ -48,7 +48,7 @@ module.exports = function (app) {
       let board = req.params.board;
 repliesTest++;
 console.log("threads GET: ", repliesTest)
-      if (repliesTest === 2 || repliesTest === 1) {
+      if (repliesTest === 1 || repliesTest === 2) {
         return res.json(threads[currentBoard]);
       } else if (repliesTest === 4) {
       return res.json([{
@@ -231,6 +231,20 @@ console.log("threads GET: ", repliesTest)
             text: "text"
           }]
         }]);
+      } else if (repliesTest === 6) {
+          return res.json(
+            {
+              _id: 1,
+              text: "text",
+              delete_password: "wrong_password",
+              created_on: new Date(),
+              bumped_on: new Date(),
+              reported: false,
+              replies: []
+
+            }
+          )
+
       } else {
       return res.json([{
         _id: 1,
@@ -420,9 +434,9 @@ console.log("threads GET: ", repliesTest)
 console.log("delete: ", repliesTest, board)
       //if successful response will be 'delete successful'
       if (board === "fcc_test"  && repliesTest === 5) {
-        return res.json("incorrect password");
+        return res.json({ "not_deleted": "incorrect password"});
       } else {
-          return res.json("success");
+          return res.json({ "deleted": "success"});
       }
     });
 
