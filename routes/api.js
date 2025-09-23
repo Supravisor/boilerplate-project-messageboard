@@ -15,7 +15,7 @@ module.exports = function (app) {
   
   app.route('/api/threads/:board')
     .post(function (req, res){
-
+console.log("threads POST: ", repliesTest)
       let board = req.body.board;
       let text = req.body.text;
       let delete_password = req.body.delete_password;
@@ -48,7 +48,8 @@ module.exports = function (app) {
       let board = req.params.board;
 repliesTest++;
 console.log("threads GET: ", repliesTest)
-      if (repliesTest === 1 || repliesTest === 2) {
+      if (repliesTest === 1 || repliesTest === 2 || repliesTest === 5) {
+console.log(threads[currentBoard])
         return res.json(threads[currentBoard]);
       } else if (repliesTest === 4) {
       return res.json([{
@@ -231,7 +232,7 @@ console.log("threads GET: ", repliesTest)
             text: "text"
           }]
         }]);
-      } else if (repliesTest === 6) {
+      } else if (repliesTest === 5) {
           return res.json(
             {
               _id: 1,
