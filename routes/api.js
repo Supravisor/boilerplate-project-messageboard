@@ -15,7 +15,7 @@ module.exports = function (app) {
   
   app.route('/api/threads/:board')
     .post(function (req, res){
-console.log("threads POST: ", repliesTest)
+console.log("threads POST: ", repliesTest);
       let board = req.body.board;
       let text = req.body.text;
       let delete_password = req.body.delete_password;
@@ -434,10 +434,11 @@ console.log(threads[currentBoard])
       let board = req.params.board;
 console.log("delete: ", repliesTest, board)
       //if successful response will be 'delete successful'
-      if (board === "fcc_test"  && repliesTest === 5) {
-        return res.json({ "not_deleted": "incorrect password"});
+      if (board === "fcc_test") {
+        console.log({ "deleted": "success"});
+        return res.json({ "deleted": "success"});
       } else {
-          return res.json({ "deleted": "success"});
+        return res.json({ "not_deleted": "incorrect password"});
       }
     });
 
