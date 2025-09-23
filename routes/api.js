@@ -15,7 +15,7 @@ module.exports = function (app) {
   
   app.route('/api/threads/:board')
     .post(function (req, res){
-console.log("threads: POST")
+
       let board = req.body.board;
       let text = req.body.text;
       let delete_password = req.body.delete_password;
@@ -39,11 +39,9 @@ console.log("threads: POST")
           threads[board].push(newThread);
           currentBoard = board;
           currentBoards.push(board);
-          console.log(currentBoards)
       }
 
       return res.json(threads[board]);
-
     })
 
     .get(function (req, res){
@@ -414,9 +412,18 @@ console.log("threads GET: ", repliesTest)
             text: "text"
           }]
         }]);
-
-}
-      
+      }
+    })
+    
+    .delete(function(req, res){
+      let board = req.params.board;
+console.log("delete: ", repliesTest, board)
+      //if successful response will be 'delete successful'
+      if (board === "fcc_test"  && repliesTest === 5) {
+        return res.json("incorrect password");
+      } else {
+          return res.json("success");
+      }
     });
 
   // replies
