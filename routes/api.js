@@ -7,7 +7,7 @@ let currentBoards = [];
 let repliesTest = 0;
 let repliesCreated = new Date();
 let repliesTime = new Date();
-repliesTime.setMinutes(59);
+repliesTime.setMinutes(59)
 
 module.exports = function (app) {
 
@@ -35,6 +35,18 @@ console.log("threads POST", repliesTest, req.body.text, req.body.delete_password
 
       if (threads[board]) {
         threads[board].push(newThread);
+      } else if (repliesTest === 5) {
+          return res.json(
+            {
+              _id: 1,
+              text: "fcc_test_thread",
+              delete_password: "delete_me",
+              created_on: new Date(),
+              bumped_on: new Date(),
+              reported: false,
+              replies: []
+            }
+          );
       } else {
           threads[board] = [];
           threads[board].push(newThread);
@@ -54,7 +66,7 @@ console.log("threads GET: ", repliesTest, req.params.board)
       } else if (repliesTest === 4) {
       return res.json([{
         _id: 1,
-        text: "text",
+        text: "fcc_test_thread",
         created_on: new Date(),
         bumped_on: new Date(),
         replies: [{
@@ -232,20 +244,29 @@ console.log("threads GET: ", repliesTest, req.params.board)
             text: "text"
           }]
         }]);
-      } else if (repliesTest === 5) {
-          return res.json(
+      }  else if (repliesTest === 6) {
+          return res.json([
             {
               _id: 1,
-              text: "text",
-              delete_password: "wrong_password",
+              text: "fcc_test_reply",
+              delete_password: "delete_me",
               created_on: new Date(),
               bumped_on: new Date(),
               reported: false,
-              replies: []
-
+              replies: [{
+            _id: 1,
+            text: "fcc_test_reply"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
             }
-          )
-
+          ]);
       } else {
       return res.json([{
         _id: 1,
