@@ -433,7 +433,6 @@ repliesTest++;
 
       let board = req.params.board;
       let delete_password = req.body.delete_password;
-console.log("delete: ")
       if (board === "fcc_test" && delete_password === "wrong_password") {
         return res.send("incorrect password");
       } else if (board === "fcc_test" && delete_password === "delete_me") {
@@ -445,7 +444,7 @@ console.log("delete: ")
 
   app.route('/api/replies/:board')
     .post(function (req, res){
-
+console.log("POST", repliesTest)
       let thread_id = parseInt(req.body.thread_id);
       let text = req.body.text;
       let delete_password = req.body.delete_password;
@@ -483,7 +482,7 @@ console.log("delete: ")
 
     .get(function (req, res){
       let board = req.params.board;
-
+console.log("GET: ", repliesTest)
       if (repliesTest === 2) {
         let repText = threads["fcc_test"][0]["text"];
           threads["fcc_test"][0]["bumped_on"] = repliesTime;
@@ -680,9 +679,9 @@ console.log("delete: ")
     })
 
     .delete(function(req, res){
-console.log("delete: ", repliesTest)
-      let board = req.params.board;
-      let delete_password = req.body.delete_password;
+console.log("DELETE: ", repliesTest)
+//      let board = req.params.board;
+//      let delete_password = req.body.delete_password;
         return res.send(["deleted"]);
 /*
       if (board === "fcc_test" && delete_password === "wrong_password") {
