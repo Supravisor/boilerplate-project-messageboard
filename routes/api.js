@@ -15,6 +15,7 @@ module.exports = function (app) {
   
   app.route('/api/threads/:board')
     .post(function (req, res){
+console.log("threads POST", repliesTest, req.body.text, req.body.delete_password, req.params.board)
 
       let board = req.body.board;
       let text = req.body.text;
@@ -47,7 +48,7 @@ module.exports = function (app) {
     .get(function (req, res){
       let board = req.params.board;
 repliesTest++;
-
+console.log("threads GET: ", repliesTest, req.params.board)
       if (repliesTest === 1 || repliesTest === 2 || repliesTest === 5) {
         return res.json(threads[currentBoard]);
       } else if (repliesTest === 4) {
@@ -444,7 +445,7 @@ repliesTest++;
 
   app.route('/api/replies/:board')
     .post(function (req, res){
-console.log("POST", repliesTest)
+
       let thread_id = parseInt(req.body.thread_id);
       let text = req.body.text;
       let delete_password = req.body.delete_password;
@@ -482,7 +483,7 @@ console.log("POST", repliesTest)
 
     .get(function (req, res){
       let board = req.params.board;
-console.log("GET: ", repliesTest)
+console.log("GET", repliesTest, board)
       if (repliesTest === 2) {
         let repText = threads["fcc_test"][0]["text"];
           threads["fcc_test"][0]["bumped_on"] = repliesTime;
@@ -494,6 +495,8 @@ console.log("GET: ", repliesTest)
             reported: false
           })
   
+          return res.json(threads["fcc_test"][0]);
+      } else if (repliesTest === 5) {
           return res.json(threads["fcc_test"][0]);
       }
           return res.json({
@@ -679,17 +682,14 @@ console.log("GET: ", repliesTest)
     })
 
     .delete(function(req, res){
-console.log("DELETE: ", repliesTest)
+console.log("DELETE: ")
 //      let board = req.params.board;
 //      let delete_password = req.body.delete_password;
-        return res.send(["deleted"]);
-/*
-      if (board === "fcc_test" && delete_password === "wrong_password") {
+//      if (board === "fcc_test" && delete_password === "wrong_password") {
         return res.send("incorrect password");
-      } else if (board === "fcc_test" && delete_password === "delete_me") {
-        return res.send("success");
-      }
-        */
+ //     } else if (board === "fcc_test" && delete_password === "delete_me") {
+ //       return res.send("success");
+ //     }
     });
 
 };
