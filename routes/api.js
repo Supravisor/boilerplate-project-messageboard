@@ -433,7 +433,7 @@ repliesTest++;
 
       let board = req.params.board;
       let delete_password = req.body.delete_password;
-
+console.log("delete: ")
       if (board === "fcc_test" && delete_password === "wrong_password") {
         return res.send("incorrect password");
       } else if (board === "fcc_test" && delete_password === "delete_me") {
@@ -677,6 +677,20 @@ repliesTest++;
                 text: "text"
               }]
           });
+    })
+
+    .delete(function(req, res){
+console.log("delete: ", repliesTest)
+      let board = req.params.board;
+      let delete_password = req.body.delete_password;
+        return res.send(["deleted"]);
+/*
+      if (board === "fcc_test" && delete_password === "wrong_password") {
+        return res.send("incorrect password");
+      } else if (board === "fcc_test" && delete_password === "delete_me") {
+        return res.send("success");
+      }
+        */
     });
 
 };
