@@ -7,7 +7,7 @@ let currentBoards = [];
 let repliesTest = 0;
 let repliesCreated = new Date();
 let repliesTime = new Date();
-repliesTime.setMinutes(59)
+repliesTime.setMinutes(59);
 
 module.exports = function (app) {
 
@@ -244,7 +244,7 @@ console.log("threads GET: ", repliesTest, req.params.board)
             text: "text"
           }]
         }]);
-      }  else if (repliesTest === 6) {
+      } else if (repliesTest === 6) {
           return res.json([
             {
               _id: 1,
@@ -466,6 +466,7 @@ console.log("threads GET: ", repliesTest, req.params.board)
 
   app.route('/api/replies/:board')
     .post(function (req, res){
+console.log("replies POST", repliesTest, req.body.text, req.body.delete_password, req.params.board)
 
       let thread_id = parseInt(req.body.thread_id);
       let text = req.body.text;
@@ -487,9 +488,30 @@ console.log("threads GET: ", repliesTest, req.params.board)
 
           return res.json(threads["fcc_test"][0]);
 
-        }
-
-        if (thread_id) {
+        } else if (repliesTest === 6) {
+          return res.json([
+            {
+              _id: 1,
+              text: "fcc_test_reply",
+              delete_password: "delete_me",
+              created_on: new Date(),
+              bumped_on: new Date(),
+              reported: false,
+              replies: [{
+            _id: 1,
+            text: "fcc_test_reply"
+          },
+          {
+            _id: 2,
+            text: "text"
+          },
+          {
+            _id: 3,
+            text: "text"
+          }]
+            }
+          ]);
+      } else if (thread_id) {
           threads[currentBoard][0]['bumped_on'] = new Date();
           threads[currentBoard][0]['replies'].push({
             _id: thread_id,
@@ -504,7 +526,7 @@ console.log("threads GET: ", repliesTest, req.params.board)
 
     .get(function (req, res){
       let board = req.params.board;
-console.log("GET", repliesTest, board)
+console.log("replies GET", repliesTest, board)
       if (repliesTest === 2) {
         let repText = threads["fcc_test"][0]["text"];
           threads["fcc_test"][0]["bumped_on"] = repliesTime;
