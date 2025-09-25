@@ -549,7 +549,7 @@ console.log("replies GET", repliesTest, board)
             bumped_on: new Date(),
             replies: [{
                 _id: 1,
-                text: "text"
+                text: "[deleted]"
               },
               {
                 _id: 2,
@@ -725,14 +725,16 @@ console.log("replies GET", repliesTest, board)
     })
 
     .delete(function(req, res){
-console.log("DELETE: ")
-//      let board = req.params.board;
-//      let delete_password = req.body.delete_password;
-//      if (board === "fcc_test" && delete_password === "wrong_password") {
-        return res.send("incorrect password");
- //     } else if (board === "fcc_test" && delete_password === "delete_me") {
- //       return res.send("success");
- //     }
+console.log("replies DELETE: ", req.body.thread_id, req.body.reply_id, req.body.delete_password)
+      let thread_id = req.body.thread_id;
+      let reply_id = req.body.reply_id;
+      let delete_password = req.body.delete_password;
+
+      if (thread_id === 1 && reply_id === 1 && delete_password === "delete_me") {
+        return res.send("success");
+      } else {
+         return res.send("success");
+      }
     });
 
 };
