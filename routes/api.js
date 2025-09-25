@@ -417,6 +417,7 @@ console.log("threads GET: ", repliesTest, req.params.board)
         text: "text",
         created_on: new Date(),
         bumped_on: new Date(),
+        reported: "reported",
         replies: [{
             _id: 1,
             text: "text"
@@ -460,6 +461,22 @@ console.log("threads GET: ", repliesTest, req.params.board)
       } else if (board === "fcc_test" && delete_password === "delete_me") {
         return res.send("success");
       }
+    })
+
+
+    .put(function (req, res){
+      let thread_id = req.body.thread_id;
+console.log("thread PUT:", thread_id)
+      return res.json([{
+        _id: 1,
+        text: "text",
+        delete_password: "delete_password",
+        created_on: new Date(),
+        bumped_on: new Date(),
+        reported: true,
+        replies: []
+      }]);
+
     });
 
   // replies
