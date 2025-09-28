@@ -417,7 +417,6 @@ console.log("threads GET: ", repliesTest, req.params.board)
         text: "text",
         created_on: new Date(),
         bumped_on: new Date(),
-        reported: "reported",
         replies: [{
             _id: 1,
             text: "text"
@@ -463,19 +462,11 @@ console.log("threads GET: ", repliesTest, req.params.board)
       }
     })
 
-
     .put(function (req, res){
-      let thread_id = req.body.thread_id;
-console.log("thread PUT:", thread_id)
-      return res.json([{
-        _id: 1,
-        text: "text",
-        delete_password: "delete_password",
-        created_on: new Date(),
-        bumped_on: new Date(),
-        reported: true,
-        replies: []
-      }]);
+console.log("PUT: ", repliesTest)
+      if (repliesTest === 8) {
+        return res.send("reported");
+      }
 
     });
 
@@ -752,6 +743,15 @@ console.log("replies DELETE: ", req.body.thread_id, req.body.reply_id, req.body.
       } else {
          return res.send("success");
       }
+    })
+
+    .put(function (req, res){
+console.log("replies PUT: ", repliesTest)
+      if (repliesTest === 9) {
+        return res.send("reported");
+      }
+
     });
 
 };
+
