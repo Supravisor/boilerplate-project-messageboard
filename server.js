@@ -13,6 +13,7 @@ const app = express();
 
 app.use(helmet.frameguard({ action: 'same-origin' }));
 app.use(helmet.dnsPrefetchControl({ allow: false }));
+app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
