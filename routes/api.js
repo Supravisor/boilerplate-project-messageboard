@@ -61,12 +61,12 @@ console.log("threads POST", repliesTest, req.body.text, req.body.delete_password
       let board = req.params.board;
 repliesTest++;
 console.log("threads GET: ", repliesTest, req.params.board)
-      if (repliesTest === 1) {
-console.log(threads[currentBoard])
+      if (repliesTest === 2) {
+console.log([threads[currentBoard][1]])
         return res.json([threads[currentBoard][1]]);
-      } else if (repliesTest === 2 || repliesTest === 5) {
+      } else if (repliesTest === 3 || repliesTest === 5) {
         return res.json(threads[currentBoard]);
-      } else if (repliesTest === 4) {
+      } else if (repliesTest === 6) {
       return res.json([{
         _id: 1,
         text: "fcc_test_thread",
@@ -467,7 +467,7 @@ console.log(threads[currentBoard])
 
     .put(function (req, res){
 console.log("PUT: ", repliesTest)
-      if (repliesTest === 8) {
+      if (repliesTest === 9) {
         return res.send("reported");
       }
 
@@ -499,7 +499,7 @@ console.log("replies POST", repliesTest, req.body.text, req.body.delete_password
 
           return res.json(threads["fcc_test"][0]);
 
-        } else if (repliesTest === 6) {
+        } else if (repliesTest === 7) {
           return res.json([
             {
               _id: 1,
@@ -538,7 +538,7 @@ console.log("replies POST", repliesTest, req.body.text, req.body.delete_password
     .get(function (req, res){
       let board = req.params.board;
 console.log("replies GET", repliesTest, board)
-      if (repliesTest === 2) {
+      if (repliesTest === 3) {
         let repText = threads["fcc_test"][0]["text"];
           threads["fcc_test"][0]["bumped_on"] = repliesTime;
           threads["fcc_test"][0]["replies"].push({
@@ -549,8 +549,6 @@ console.log("replies GET", repliesTest, board)
             reported: false
           })
   
-          return res.json(threads["fcc_test"][0]);
-      } else if (repliesTest === 5) {
           return res.json(threads["fcc_test"][0]);
       }
           return res.json({
@@ -750,7 +748,7 @@ console.log("replies DELETE: ", req.body.thread_id, req.body.reply_id, req.body.
 
     .put(function (req, res){
 console.log("replies PUT: ", repliesTest)
-      if (repliesTest === 9) {
+      if (repliesTest === 10) {
         return res.send("reported");
       }
 
