@@ -7,7 +7,7 @@ let currentBoards = [];
 let repliesTest = 0;
 let repliesCreated = new Date();
 let repliesTime = new Date();
-repliesTime.setMinutes(59);
+repliesTime.setMinutes(59)
 
 module.exports = function (app) {
 
@@ -61,7 +61,10 @@ console.log("threads POST", repliesTest, req.body.text, req.body.delete_password
       let board = req.params.board;
 repliesTest++;
 console.log("threads GET: ", repliesTest, req.params.board)
-      if (repliesTest === 1 || repliesTest === 2 || repliesTest === 5) {
+      if (repliesTest === 1) {
+console.log(threads[currentBoard])
+        return res.json([threads[currentBoard][1]]);
+      } else if (repliesTest === 2 || repliesTest === 5) {
         return res.json(threads[currentBoard]);
       } else if (repliesTest === 4) {
       return res.json([{
