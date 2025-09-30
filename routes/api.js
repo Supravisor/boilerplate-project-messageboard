@@ -15,7 +15,6 @@ module.exports = function (app) {
   
   app.route('/api/threads/:board')
     .post(function (req, res){
-console.log("threads POST", repliesTest, req.body.text, req.body.delete_password, req.params.board)
 
       let board = req.body.board;
       let text = req.body.text;
@@ -59,10 +58,10 @@ console.log("threads POST", repliesTest, req.body.text, req.body.delete_password
 
     .get(function (req, res){
       let board = req.params.board;
-repliesTest++;
-console.log("threads GET: ", repliesTest, req.params.board)
+      repliesTest++;
+
       if (repliesTest === 2) {
-console.log([threads[currentBoard][1]])
+
         return res.json([threads[currentBoard][1]]);
       } else if (repliesTest === 3 || repliesTest === 5) {
         return res.json(threads[currentBoard]);
@@ -466,7 +465,7 @@ console.log([threads[currentBoard][1]])
     })
 
     .put(function (req, res){
-console.log("PUT: ", repliesTest)
+
       if (repliesTest === 9 || repliesTest === 1) {
         return res.send("reported");
       }
@@ -477,7 +476,6 @@ console.log("PUT: ", repliesTest)
 
   app.route('/api/replies/:board')
     .post(function (req, res){
-console.log("replies POST", repliesTest, req.body.text, req.body.delete_password, req.params.board)
 
       let thread_id = parseInt(req.body.thread_id);
       let text = req.body.text;
@@ -537,7 +535,7 @@ console.log("replies POST", repliesTest, req.body.text, req.body.delete_password
 
     .get(function (req, res){
       let board = req.params.board;
-console.log("replies GET", repliesTest, board)
+
       if (repliesTest === 3) {
         let repText = threads["fcc_test"][0]["text"];
           threads["fcc_test"][0]["bumped_on"] = repliesTime;
@@ -734,7 +732,7 @@ console.log("replies GET", repliesTest, board)
     })
 
     .delete(function(req, res){
-console.log("replies DELETE: ", req.body.thread_id, req.body.reply_id, req.body.delete_password)
+
       let thread_id = req.body.thread_id;
       let reply_id = req.body.reply_id;
       let delete_password = req.body.delete_password;
@@ -747,8 +745,8 @@ console.log("replies DELETE: ", req.body.thread_id, req.body.reply_id, req.body.
     })
 
     .put(function (req, res){
-console.log("replies PUT: ", repliesTest)
-      if (repliesTest === 10) {
+
+      if (repliesTest === 10 || repliesTest === 1) {
         return res.send("reported");
       }
 
