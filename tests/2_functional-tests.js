@@ -14,7 +14,7 @@ suite('Functional Tests', function() {
             "text": "new test",
             "delete_password": "del"
           } )
-          .end(function(err, res){
+          .end(function(err, res) {
             assert.equal(res.status, 200);
             assert.isObject(res.body[0], 'response should be an object');
             assert.property(res.body[0], '_id', 'id number for thread');
@@ -47,14 +47,14 @@ suite('Functional Tests', function() {
           done();
       });
 
-      test('Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done){
+      test('Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done) {
         chai.request(server)
           .delete( '/api/threads/fcc_test' )
           .send( {
             "board": "fcc_test",
             "delete_password": "wrong_password"
           } )
-          .end(function(err, res){
+          .end(function(err, res) {
             assert.equal(res.status, 200);
             assert.isString(res.text, 'response should be a string');
             assert.include(res.text, 'incorrect password', 'reponse should include an invalid result');
@@ -62,14 +62,14 @@ suite('Functional Tests', function() {
           });
       });
 
-      test('Deleting a thread with the correct password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done){
+      test('Deleting a thread with the correct password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done) {
         chai.request(server)
           .delete( '/api/threads/fcc_test' )
           .send( {
             "board": "fcc_test",
             "delete_password": "delete_me"
           } )
-          .end(function(err, res){
+          .end(function(err, res) {
             assert.equal(res.status, 200);
             assert.isString(res.text, 'response should be a string');
             assert.include(res.text, 'success', 'reponse should include a valid result');
@@ -77,13 +77,13 @@ suite('Functional Tests', function() {
           });
       });
 
-      test('Reporting a thread', function(done){
+      test('Reporting a thread: PUT request to /api/threads/{board}', function(done) {
         chai.request(server)
           .put( '/api/threads/fcc_test' )
           .send( {
             "_id": 1
           } )
-          .end(function(err, res){
+          .end(function(err, res) {
             assert.equal(res.status, 200);
             assert.isString(res.text, 'response should be a string');
             assert.include(res.text, 'reported', 'response should indicate if the thread is reported');
@@ -99,7 +99,7 @@ suite('Functional Tests', function() {
             "text": "new reply text",
             "delete_password": "pass"
           } )
-          .end(function(err, res){
+          .end(function(err, res) {
             assert.equal(res.status, 200);
             assert.isObject(res.body[0], 'response should be an object');
             assert.property(res.body[0], '_id', 'id number for thread');
@@ -130,16 +130,16 @@ suite('Functional Tests', function() {
             assert.property(res.body[0], 'replies', 'replies for the thread');
           });
           done();
-    });
+      });
 
-      test('Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done){
+      test('Deleting a reply with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done) {
         chai.request(server)
           .delete( '/api/replies/fcc_test' )
           .send( {
             "board": "fcc_test",
             "delete_password": "wrong_password"
           } )
-          .end(function(err, res){
+          .end(function(err, res) {
             assert.equal(res.status, 200);
             assert.isString(res.text, 'response should be a string');
             assert.include(res.text, 'incorrect password', 'reponse should include an invalid result');
@@ -147,7 +147,7 @@ suite('Functional Tests', function() {
           });
       });
 
-      test('Deleting a thread with the correct password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done){
+      test('Deleting a reply with the correct password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done) {
         chai.request(server)
           .delete( '/api/replies/fcc_test' )
           .send( {
@@ -155,10 +155,24 @@ suite('Functional Tests', function() {
             "reply_id": 1,
             "delete_password": "delete_me"
           } )
-          .end(function(err, res){
+          .end(function(err, res) {
             assert.equal(res.status, 200);
             assert.isString(res.text, 'response should be a string');
             assert.include(res.text, 'success', 'reponse should include a valid result');
+            done();
+          });
+      });
+
+      test('Reporting a reply: PUT request to /api/replies/{board}', function(done) {
+        chai.request(server)
+          .put( '/api/replies/fcc_test' )
+          .send( {
+            "_id": 10
+          } )
+          .end(function(err, res) {
+            assert.equal(res.status, 200);
+            assert.isString(res.text, 'response should be a string');
+            assert.include(res.text, 'reported', 'response should indicate if the thread is reported');
             done();
           });
       });
