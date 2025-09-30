@@ -5,7 +5,7 @@ const server = require('../server');
 
 chai.use(chaiHttp);
 
-suite('Functional Tests', function() {
+suite('POST thread', function() {
 
       test('Creating a new thread: POST request to /api/threads/{board}', function(done) {
         chai.request(server)
@@ -28,6 +28,10 @@ suite('Functional Tests', function() {
           });
       });
 
+});
+
+suite('GET thread', function() {
+
       test("Viewing the 10 most recent threads with 3 replies each: GET request to /api/threads/test", function(done) {
         chai
           .request(server)
@@ -47,5 +51,24 @@ suite('Functional Tests', function() {
           });
           done();
     });
+
+});
+
+suite('DELETE Thread', function() {
+
+  test('Deleting a thread with the incorrect password', function(done){
+    chai.request(server)
+      .delete( '/api/threads/fcc_test' )
+      .send( {
+        "board": "fcc_test",
+        "delete_password": "wrong_password"
+      } )
+      .end(function(err, res){
+        assert.equal(res.status, 200);
+        assert.isString(res.text, 'response should be a string');
+        assert.include(res.text, 'incorrect password', 'Reponse should include a string');
+        done();
+      });
+  });
 
 });
