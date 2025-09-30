@@ -467,7 +467,7 @@ console.log([threads[currentBoard][1]])
 
     .put(function (req, res){
 console.log("PUT: ", repliesTest)
-      if (repliesTest === 9) {
+      if (repliesTest === 9 || repliesTest === 1) {
         return res.send("reported");
       }
 

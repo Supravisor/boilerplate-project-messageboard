@@ -66,9 +66,28 @@ suite('DELETE Thread', function() {
       .end(function(err, res){
         assert.equal(res.status, 200);
         assert.isString(res.text, 'response should be a string');
-        assert.include(res.text, 'incorrect password', 'Reponse should include a string');
+        assert.include(res.text, 'incorrect password', 'reponse should include an invalid result');
         done();
       });
   });
 
 });
+
+suite('PUT report', function() {
+
+  test('Reporting a thread', function(done){
+    chai.request(server)
+      .put( '/api/threads/fcc_test' )
+      .send( {
+        "_id": 1
+      } )
+      .end(function(err, res){
+        assert.equal(res.status, 200);
+        assert.isString(res.text, 'response should be a string');
+        assert.include(res.text, 'reported', 'response should indicate if the thread is reported');
+        done();
+      });
+  });
+
+});
+
