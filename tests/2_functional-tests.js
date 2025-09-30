@@ -34,7 +34,6 @@ suite('Functional Tests', function() {
           .get('/api/threads/test')
           .query({ _id: 1 })
           .end(function(err, res) {
-            const { stockData } = res.body;
             assert.equal(res.status, 200);
             assert.isObject(res.body[0], 'response should be an object');
             assert.property(res.body[0], '_id', 'id number for thread');
@@ -144,6 +143,22 @@ suite('Functional Tests', function() {
             assert.equal(res.status, 200);
             assert.isString(res.text, 'response should be a string');
             assert.include(res.text, 'incorrect password', 'reponse should include an invalid result');
+            done();
+          });
+      });
+
+      test('Deleting a thread with the correct password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done){
+        chai.request(server)
+          .delete( '/api/replies/fcc_test' )
+          .send( {
+            "thread_id": 1,
+            "reply_id": 1,
+            "delete_password": "delete_me"
+          } )
+          .end(function(err, res){
+            assert.equal(res.status, 200);
+            assert.isString(res.text, 'response should be a string');
+            assert.include(res.text, 'success', 'reponse should include a valid result');
             done();
           });
       });
