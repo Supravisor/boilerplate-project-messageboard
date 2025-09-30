@@ -113,5 +113,24 @@ suite('Functional Tests', function() {
             done();
           });
       });
-   
+
+      test("Viewing a single thread with all replies: GET request to /api/replies/{board}", function(done) {
+        chai
+          .request(server)
+          .get('/api/replies/test')
+          .query({ _id: 1 })
+          .end(function(err, res) {
+            assert.equal(res.status, 200);
+            assert.isObject(res.body[0], 'response should be an object');
+            assert.property(res.body[0], '_id', 'id number for thread');
+            assert.property(res.body[0], 'delete_password', 'password');
+            assert.property(res.body[0], 'text', 'thread text');
+            assert.property(res.body[0], 'created_on', 'date thread created');
+            assert.property(res.body[0], 'bumped_on', 'last date thread updated');
+            assert.property(res.body[0], 'reported', 'did someone report an issue with the thread?');
+            assert.property(res.body[0], 'replies', 'replies for the thread');
+          });
+          done();
+    });
+
 });
