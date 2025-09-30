@@ -48,34 +48,49 @@ suite('Functional Tests', function() {
           done();
     });
 
-  test('Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done){
-    chai.request(server)
-      .delete( '/api/threads/fcc_test' )
-      .send( {
-        "board": "fcc_test",
-        "delete_password": "wrong_password"
-      } )
-      .end(function(err, res){
-        assert.equal(res.status, 200);
-        assert.isString(res.text, 'response should be a string');
-        assert.include(res.text, 'incorrect password', 'reponse should include an invalid result');
-        done();
+      test('Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done){
+        chai.request(server)
+          .delete( '/api/threads/fcc_test' )
+          .send( {
+            "board": "fcc_test",
+            "delete_password": "wrong_password"
+          } )
+          .end(function(err, res){
+            assert.equal(res.status, 200);
+            assert.isString(res.text, 'response should be a string');
+            assert.include(res.text, 'incorrect password', 'reponse should include an invalid result');
+            done();
+          });
       });
-  });
 
-  test('Reporting a thread', function(done){
-    chai.request(server)
-      .put( '/api/threads/fcc_test' )
-      .send( {
-        "_id": 1
-      } )
-      .end(function(err, res){
-        assert.equal(res.status, 200);
-        assert.isString(res.text, 'response should be a string');
-        assert.include(res.text, 'reported', 'response should indicate if the thread is reported');
-        done();
+      test('Deleting a thread with the correct password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done){
+        chai.request(server)
+          .delete( '/api/threads/fcc_test' )
+          .send( {
+            "board": "fcc_test",
+            "delete_password": "delete_me"
+          } )
+          .end(function(err, res){
+            assert.equal(res.status, 200);
+            assert.isString(res.text, 'response should be a string');
+            assert.include(res.text, 'success', 'reponse should include a valid result');
+            done();
+          });
       });
-  });
+
+      test('Reporting a thread', function(done){
+        chai.request(server)
+          .put( '/api/threads/fcc_test' )
+          .send( {
+            "_id": 1
+          } )
+          .end(function(err, res){
+            assert.equal(res.status, 200);
+            assert.isString(res.text, 'response should be a string');
+            assert.include(res.text, 'reported', 'response should indicate if the thread is reported');
+            done();
+          });
+      });
 
       test('Creating a new thread: POST request to /api/threads/{board}', function(done) {
         chai.request(server)
