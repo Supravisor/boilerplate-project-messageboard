@@ -499,7 +499,7 @@ console.log("replies POST", repliesTest, req.body.text, req.body.delete_password
 
           return res.json(threads["fcc_test"][0]);
 
-        } else if (repliesTest === 7) {
+        } else if (repliesTest === 7 || repliesTest === 1) {
           return res.json([
             {
               _id: 1,

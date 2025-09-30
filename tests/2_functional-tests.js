@@ -5,7 +5,7 @@ const server = require('../server');
 
 chai.use(chaiHttp);
 
-suite('POST thread', function() {
+suite('Functional Tests', function() {
 
       test('Creating a new thread: POST request to /api/threads/{board}', function(done) {
         chai.request(server)
@@ -28,10 +28,6 @@ suite('POST thread', function() {
           });
       });
 
-});
-
-suite('GET thread', function() {
-
       test("Viewing the 10 most recent threads with 3 replies each: GET request to /api/threads/test", function(done) {
         chai
           .request(server)
@@ -52,11 +48,7 @@ suite('GET thread', function() {
           done();
     });
 
-});
-
-suite('DELETE Thread', function() {
-
-  test('Deleting a thread with the incorrect password', function(done){
+  test('Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done){
     chai.request(server)
       .delete( '/api/threads/fcc_test' )
       .send( {
@@ -70,10 +62,6 @@ suite('DELETE Thread', function() {
         done();
       });
   });
-
-});
-
-suite('PUT report', function() {
 
   test('Reporting a thread', function(done){
     chai.request(server)
@@ -89,5 +77,26 @@ suite('PUT report', function() {
       });
   });
 
+      test('Creating a new thread: POST request to /api/threads/{board}', function(done) {
+        chai.request(server)
+          .post( '/api/replies/test' )
+          .send( {
+            "_id": 1,
+            "text": "new reply text",
+            "delete_password": "pass"
+          } )
+          .end(function(err, res){
+            assert.equal(res.status, 200);
+            assert.isObject(res.body[0], 'response should be an object');
+            assert.property(res.body[0], '_id', 'id number for thread');
+            assert.property(res.body[0], 'delete_password', 'password');
+            assert.property(res.body[0], 'text', 'thread text');
+            assert.property(res.body[0], 'created_on', 'date thread created');
+            assert.property(res.body[0], 'bumped_on', 'last date thread updated');
+            assert.property(res.body[0], 'reported', 'did someone report an issue with the thread?');
+            assert.property(res.body[0], 'replies', 'replies for the thread');
+            done();
+          });
+      });
+   
 });
-
