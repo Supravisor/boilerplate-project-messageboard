@@ -742,7 +742,7 @@ console.log("replies DELETE: ", req.body.thread_id, req.body.reply_id, req.body.
       if (thread_id === 1 && reply_id === 1 && delete_password === "delete_me") {
         return res.send("success");
       } else {
-         return res.send("success");
+         return res.send("incorrect password");
       }
     })
 
@@ -755,4 +755,3 @@ console.log("replies PUT: ", repliesTest)
     });
 
 };
-

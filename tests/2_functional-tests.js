@@ -46,7 +46,7 @@ suite('Functional Tests', function() {
             assert.property(res.body[0], 'replies', 'replies for the thread');
           });
           done();
-    });
+      });
 
       test('Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done){
         chai.request(server)
@@ -132,5 +132,20 @@ suite('Functional Tests', function() {
           });
           done();
     });
+
+      test('Deleting a thread with the incorrect password: DELETE request to /api/threads/{board} with an invalid delete_password', function(done){
+        chai.request(server)
+          .delete( '/api/replies/fcc_test' )
+          .send( {
+            "board": "fcc_test",
+            "delete_password": "wrong_password"
+          } )
+          .end(function(err, res){
+            assert.equal(res.status, 200);
+            assert.isString(res.text, 'response should be a string');
+            assert.include(res.text, 'incorrect password', 'reponse should include an invalid result');
+            done();
+          });
+      });
 
 });
